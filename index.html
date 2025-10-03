@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Portafolio de Trabajos</title>
+    <meta name="description" content="Portafolio personal para almacenar y mostrar mis trabajos y proyectos">
+    <meta property="og:title" content="Mi Portafolio de Trabajos">
+    <meta property="og:description" content="Explora mi colección de trabajos y proyectos">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#1E40AF',
+                        accent: '#F59E0B'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-50 top-0">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-primary">
+                        <i class="fas fa-briefcase mr-2"></i>
+                        Mi Portafolio Base de Datos II
+                    </h1>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#inicio" class="text-gray-700 hover:text-primary transition duration-300">Inicio</a>
+                    <a href="#proyectos" class="text-gray-700 hover:text-primary transition duration-300">Proyectos</a>
+                    <a href="#contacto" class="text-gray-700 hover:text-primary transition duration-300">Contacto</a>
+                </div>
+                <button id="menu-toggle" class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <a href="#inicio" class="block py-2 text-gray-700 hover:text-primary">Inicio</a>
+                <a href="#proyectos" class="block py-2 text-gray-700 hover:text-primary">Proyectos</a>
+                <a href="#contacto" class="block py-2 text-gray-700 hover:text-primary">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="gradient-bg text-white py-20 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-5xl font-bold mb-6">Bienvenido a Mi Portafolio personal</h2>
+                <p class="text-xl mb-8 opacity-90">
+                    Aqui puedes encontrar trabajos realizados en la materia de Base de Datos II durante el ciclo academico 2025.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="openAddProjectModal()" class="bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">
+                        <i class="fas fa-plus mr-2"></i>
+                        Agregar Proyecto
+                    </button>
+                    <a href="#proyectos" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary transition duration-300">
+                        <i class="fas fa-eye mr-2"></i>
+                        Ver Proyectos
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="proyectos" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Mis Proyectos</h2>
+                <p class="text-xl text-gray-600">Explora mi colección de trabajos organizados por categorías</p>
+            </div>
+
+            <!-- Search and Filters -->
+            <div class="mb-8">
+                <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+                    <!-- Search Bar -->
+                    <div class="relative flex-1 max-w-md">
+                        <input 
+                            type="text" 
+                            id="searchInput" 
+                            placeholder="Buscar proyectos..." 
+                            class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                        >
+                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                    </div>
+
+                    <!-- Category Filter -->
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="filterProjects('all')" class="filter-btn bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition duration-300">
+                            Todos
+                        </button>
+                        <button onclick="filterProjects('web')" class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition duration-300">
+                            SEMANA 1
+                        </button>
+                        <button onclick="filterProjects('mobile')" class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition duration-300">
+                            SEMANA 2
+                        </button>
+                        <button onclick="filterProjects('design')" class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition duration-300">
+                            SEMANA 
+                        </button>
+                        <button onclick="filterProjects('other')" class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition duration-300">
+                            SEMANA 4
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projects Grid -->
+            <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Projects will be loaded here dynamically -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="text-center py-16 hidden">
+                <i class="fas fa-folder-open text-6xl text-gray-300 mb-4"></i>
+                <h3 class="text-2xl font-semibold text-gray-600 mb-2">No hay proyectos aún</h3>
+                <p class="text-gray-500 mb-6">Comienza agregando tu primer proyecto</p>
+                <button onclick="openAddProjectModal()" class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-secondary transition duration-300">
+                    <i class="fas fa-plus mr-2"></i>
+                    Agregar Primer Proyecto
+                </button>
+            </div>
+
+            <!-- No Results State -->
+            <div id="noResults" class="text-center py-16 hidden">
+                <i class="fas fa-search text-6xl text-gray-300 mb-4"></i>
+                <h3 class="text-2xl font-semibold text-gray-600 mb-2">No se encontraron proyectos</h3>
+                <p class="text-gray-500">Intenta con otros términos de búsqueda o categorías</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="bg-gray-800 text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-8">Contacto</h2>
+            <p class="text-xl mb-8">¿Interesado en colaborar? ¡Hablemos!</p>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                <a href="mailto:tu-email@ejemplo.com" class="bg-primary hover:bg-secondary px-6 py-3 rounded-lg transition duration-300">
+                    <i class="fas fa-envelope mr-2"></i>
+                    Enviar Email
+                </a>
+                <a href="https://linkedin.com/in/tu-perfil" target="_blank" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg transition duration-300">
+                    <i class="fab fa-linkedin mr-2"></i>
+                    LinkedIn
+                </a>
+                <a href="https://github.com/tu-usuario" target="_blank" class="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-lg transition duration-300">
+                    <i class="fab fa-github mr-2"></i>
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 Mi Portafolio. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Add Project Modal -->
+    <div id="addProjectModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-md w-full max-h-screen overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-2xl font-bold text-gray-800">Agregar Proyecto</h3>
+                    <button onclick="closeAddProjectModal()" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <form id="addProjectForm">
+                    <div class="mb-4">
+                        <label for="projectTitle" class="block text-sm font-medium text-gray-700 mb-2">Título *</label>
+                        <input type="text" id="projectTitle" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="projectDescription" class="block text-sm font-medium text-gray-700 mb-2">Descripción *</label>
+                        <textarea id="projectDescription" required rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="projectCategory" class="block text-sm font-medium text-gray-700 mb-2">Categoría *</label>
+                        <select id="projectCategory" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <option value="">Seleccionar categoría</option>
+                            <option value="web">semana 01</option>
+                            <option value="mobile">semana 02</option>
+                            <option value="design">semana 03</option>
+                            <option value="other">semana 04</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="projectImage" class="block text-sm font-medium text-gray-700 mb-2">URL de Imagen</label>
+                        <input type="url" id="projectImage" placeholder="https://ejemplo.com/imagen.jpg" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="projectUrl" class="block text-sm font-medium text-gray-700 mb-2">URL del Proyecto</label>
+                        <input type="url" id="projectUrl" placeholder="https://tu-proyecto.com" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="projectTags" class="block text-sm font-medium text-gray-700 mb-2">Etiquetas (separadas por comas)</label>
+                        <input type="text" id="projectTags" placeholder="HTML, CSS, JavaScript" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                    </div>
+                    
+                    <div class="flex gap-3">
+                        <button type="submit" class="flex-1 bg-primary text-white py-2 px-4 rounded-lg hover:bg-secondary transition duration-300">
+                            <i class="fas fa-save mr-2"></i>
+                            Guardar Proyecto
+                        </button>
+                        <button type="button" onclick="closeAddProjectModal()" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition duration-300">
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Project Modal -->
+    <div id="viewProjectModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-2xl w-full max-h-screen overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 id="modalTitle" class="text-2xl font-bold text-gray-800"></h3>
+                    <div class="flex gap-2">
+                        <button id="editProjectBtn" onclick="editProject()" class="text-primary hover:text-secondary">
+                            <i class="fas fa-edit text-xl"></i>
+                        </button>
+                        <button id="deleteProjectBtn" onclick="deleteProject()" class="text-red-500 hover:text-red-700">
+                            <i class="fas fa-trash text-xl"></i>
+                        </button>
+                        <button onclick="closeViewProjectModal()" class="text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="modalContent">
+                    <!-- Project details will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
